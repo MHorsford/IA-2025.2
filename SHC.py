@@ -91,7 +91,7 @@ def main():
     print(f"Média de tempo: {avg_time:.6f}s ± {std_time:.6f}s")
 
     # Mostra as 5 melhores soluções distintas
-    print("\nTop 5 soluções distintas:")
+    print("\nTop 5 melhores soluções distintas encontradas:\n")
     distinct_solutions = []
     seen = set()
 
@@ -107,13 +107,19 @@ def main():
             break
 
     for i, (solution, collisions) in enumerate(distinct_solutions[:5], 1):
-        print(f"\nSolução #{i} (Colisões: {collisions}):")
+        print(f"Solução #{i} (Colisões: {collisions})")
+        print("Vetor:", list(solution))
         board = np.zeros((8, 8), dtype=str)
         for col, row in enumerate(solution):
             board[row][col] = 'Q'
 
         for row in board:
             print(' '.join(['Q' if cell == 'Q' else '.' for cell in row]))
+        print()  # Linha em branco entre soluções
+
+    # Opcional: mostrar quantas soluções perfeitas (0 colisões) foram encontradas
+    total_zero_col = len(solutions[0])
+    print(f"Total de soluções com 0 colisões encontradas nas 50 execuções: {total_zero_col}")
 
 
 if __name__ == "__main__":
